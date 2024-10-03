@@ -52,6 +52,24 @@ candidatosRoutes.post("/", (req, res) => {
 
 });
 
+candidatosRoutes.get("/:id", (req, res) => {
+    const { id } = req.params;
+
+    //console.log(id);
+    const candidato = candidatos.find((candidate) => candidate.id == id);
+    if (!candidato) {
+        return res.status(404).send({
+            message: "candidato não encontrado",
+        });
+    };
+
+    return res.status(200).send({
+        message: "candidato encontrado",
+        candidato,
+    });
+});
+
+
 //rota para buscar um Candidato por seu ID
 candidatosRoutes.get("/:id", (req, res) => {
     const { id } = req.params;
